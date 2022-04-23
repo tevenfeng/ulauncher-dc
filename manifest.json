@@ -1,0 +1,36 @@
+{
+    "required_api_version": "^2.0.0",
+    "name": "Decimal Converter",
+    "description": "Convert numbers into binary/decimal/octal/hexadecimal",
+    "developer_name": "Teven Feng",
+    "icon": "images/icon.png",
+    "options": {
+        "query_debounce": 0.05
+    },
+    "preferences": [
+        {
+            "id": "binary_kw",
+            "type": "keyword",
+            "name": "Decimal Converter(binary)",
+            "default_value": "bin"
+        },
+        {
+            "id": "octal_kw",
+            "type": "keyword",
+            "name": "Decimal Converter(octal)",
+            "default_value": "oct"
+        },
+        {
+            "id": "decimal_kw",
+            "type": "keyword",
+            "name": "Decimal Converter(decimal)",
+            "default_value": "dc"
+        },
+        {
+            "id": "hexadecimal_kw",
+            "type": "keyword",
+            "name": "Decimal Converter(hexadecimal)",
+            "default_value": "hex"
+        }
+    ]
+}
