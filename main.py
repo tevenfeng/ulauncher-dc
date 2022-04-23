@@ -37,21 +37,22 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items = []
 
-        rawstr = event.get_argument()
-        if rawstr is None or len(rawstr) == 0:
+        raw_str = event.get_argument()
+        if raw_str is None or len(raw_str) == 0:
             return RenderResultListAction(items)
 
         keyword = event.get_keyword()
         result_list = []
         if keyword == extension.preferences["binary_kw"]:
-            result_list = converter.convert_from_binary(rawstr)
+            result_list = converter.convert_from_binary(raw_str)
         elif keyword == extension.preferences["octal_kw"]:
-            result_list = converter.convert_from_octal(rawstr)
+            result_list = converter.convert_from_octal(raw_str)
         elif keyword == extension.preferences["decimal_kw"]:
-            result_list = converter.convert_from_decimal(rawstr)
+            result_list = converter.convert_from_decimal(raw_str)
         elif keyword == extension.preferences["hexadecimal_kw"]:
-            result_list = converter.convert_from_hexadecimal(rawstr)
+            result_list = converter.convert_from_hexadecimal(raw_str)
 
+        logging.info("Decimal Converter, len(result_list)=" + str(len(result_list)))
         if len(result_list) != 3:
             return RenderResultListAction(items)
 
