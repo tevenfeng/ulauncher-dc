@@ -7,7 +7,7 @@ def convert_from_binary(number_str):
     octal = oct(decimal)[1:]
     hexadecimal = hex(decimal)[2:].upper()
 
-    return [decimal, octal, hexadecimal]
+    return [str(decimal), octal, hexadecimal]
 
 
 def convert_from_octal(number_str):
@@ -15,7 +15,7 @@ def convert_from_octal(number_str):
     binary = bin(decimal)[2:].zfill(8)
     hexadecimal = hex(decimal)[2:].upper()
 
-    return [binary, decimal, hexadecimal]
+    return [binary, str(decimal), hexadecimal]
 
 
 def convert_from_decimal(number_str):
@@ -31,4 +31,9 @@ def convert_from_hexadecimal(number_str):
     binary = bin(decimal)[2:].zfill(8)
     octal = oct(decimal)[1:]
 
-    return [binary, decimal, octal]
+    return [binary, str(decimal), octal]
+
+
+if __name__ == "__main__":
+    number_str = "0xA"
+    print(convert_from_hexadecimal(number_str))
