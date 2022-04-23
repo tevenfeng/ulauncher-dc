@@ -11,10 +11,18 @@ from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAct
 import converter
 
 logger = logging.getLogger(__name__)
+from_binary_names = ["octal", "decimal", "hexadecimal"]
 from_binary_icons = ["octal.png", "decimal.png", "hexadecimal.png"]
+
+from_octal_names = ["binary", "decimal", "hexadecimal"]
 from_octal_icons = ["binary.png", "decimal.png", "hexadecimal.png"]
+
+from_decimal_names = ["binary", "octal", "hexadecimal"]
 from_decimal_icons = ["binary.png", "octal.png", "hexadecimal.png"]
+
+from_hexadecimal_names = ["binary", "octal", "decimal"]
 from_hexadecimal_icons = ["binary.png", "octal.png", "decimal.png"]
+
 
 class DecimalConverterExtension(Extension):
 
@@ -35,55 +43,60 @@ class KeywordQueryEventListener(EventListener):
 
         keyword = event.get_keyword()
         result_list = []
-        if keyword == "bin":
+        if keyword == extension.preferences["binary_kw"]:
             result_list = converter.convert_from_binary(rawstr)
-        elif keyword == "oct":
+        elif keyword == extension.preferences["octal_kw"]:
             result_list = converter.convert_from_octal(rawstr)
-        elif keyword == "dc":
+        elif keyword == extension.preferences["decimal_kw"]:
             result_list = converter.convert_from_decimal(rawstr)
-        elif keyword == "hex":
+        elif keyword == extension.preferences["hexadecimal_kw"]:
             result_list = converter.convert_from_hexadecimal(rawstr)
 
         if len(result_list) != 3:
             return RenderResultListAction(items)
 
-        if keyword == "bin":
+        des_l = ', press enter to copy to clipboard.'
+        if keyword == extension.preferences["binary_kw"]:
             for i in range(3):
                 result = result_list[i]
                 icon_str = 'images/' + from_binary_icons[i]
+                des_str = from_binary_names[i] + des_l
                 items.append(ExtensionResultItem(icon=icon_str,
                                                  name=result,
-                                                 description='Chars',
+                                                 description=des_str,
                                                  highlightable=False,
                                                  on_enter=CopyToClipboardAction(result)
                                                  ))
-        elif keyword == "oct":
+        elif keyword == extension.preferences["octal_kw"]:
             for i in range(3):
                 result = result_list[i]
                 icon_str = 'images/' + from_octal_icons[i]
+                des_str = from_octal_names[i] + des_l
                 items.append(ExtensionResultItem(icon=icon_str,
                                                  name=result,
-                                                 description='Chars',
+                                                 description=des_str,
                                                  highlightable=False,
                                                  on_enter=CopyToClipboardAction(result)
                                                  ))
-        elif keyword == "dc":
+        elif keyword == extension.preferences["decimal_kw"]:
             for i in range(3):
                 result = result_list[i]
                 icon_str = 'images/' + from_decimal_icons[i]
+                des_str = from_decimal_names[i] + des_l
                 items.append(ExtensionResultItem(icon=icon_str,
                                                  name=result,
-                                                 description='Chars',
+                                                 description=des_str,
                                                  highlightable=False,
                                                  on_enter=CopyToClipboardAction(result)
                                                  ))
-        elif keyword == "hex":
+        elif keyword == extension.preferences["hexadecimal_kw"]:
             for i in range(3):
                 result = result_list[i]
                 icon_str = 'images/' + from_hexadecimal_icons[i]
+                des_str = from_hexadecimal_names[i] + des_l
                 items.append(ExtensionResultItem(icon=icon_str,
                                                  name=result,
-                                                 description='Chars',
+                                                 description=des_str,
                                                  highlightable=False,
                                                  on_enter=CopyToClipboardAction(result)
                                                  ))
